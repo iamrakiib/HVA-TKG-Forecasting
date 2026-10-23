@@ -1,0 +1,12 @@
+{
+  "jobs": [
+    {
+      "backbone": "tirgn",
+      "dataset": "ICEWS14",
+      "seed": 0,
+      "data_root": "/path/to/prepared_inputs/data",
+      "valid_dump": "/path/to/prepared_inputs/dumps/ICEWS14/valid.npz",
+      "test_dump": "/path/to/prepared_inputs/dumps/ICEWS14/test.npz"
+    }
+  ]
+}
