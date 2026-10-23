@@ -4,8 +4,6 @@ Source code supplement for *Learning Candidate-Level History Validity Correction
 
 HVA learns a ranking-stage correction over frozen temporal knowledge graph backbone scores. This release supplies adapter overlays for TiRGN, RE-GCN, CyGNet, CENET, and TeMP, together with comparison controls, ablations, diagnostics, and statistical analysis tools.
 
-This is a code-only release. Datasets, backbone training implementations, checkpoints, original score dumps, and experimental results are not included. Exact reproduction of manuscript tables requires the corresponding original inputs and run configurations. See [reproducibility and provenance](docs/EXPERIMENT_COVERAGE.md).
-
 ## Installation
 
 Use an environment with Python, pip, and PyTorch support for your hardware:
@@ -45,8 +43,6 @@ Use `prepared_inputs/data` and `prepared_inputs/dumps/ICEWS14/{valid,test}.npz` 
 
 ## Run HVA and comparisons
 
-Copy [the example plan](examples/experiment_plan.example.json), replace its paths with real inputs, and preview commands:
-
 ```bash
 python scripts/run_experiment_matrix.py \
     --plan /path/to/plan.json --output-root /path/to/run_artifacts \
@@ -58,9 +54,7 @@ Add `--execute` to run. Outputs must be outside the source repository. `--requir
 
 HVA defaults: K=100, relation embedding dimension 16, two hidden layers of width 64, dropout 0.10, AdamW learning rate 1e-3, batch size 64, at most 12 epochs, patience 3, pairwise margin 0.20, pairwise weight 0.25, residual penalty 1e-4, and staleness threshold 10. Adapter fitting uses a chronological split of the validation dump; test data is reserved for evaluation.
 
-RHVC requires a complete coefficient configuration; see [the configuration schema](docs/RHVC_CONFIG_SCHEMA.md). Pass it with `--rhvc-params-json /path/to/params.json`. The broad-history implementation is a later reimplementation; historical numerical equivalence is unverified.
-
-`--include-hri` runs one deterministic HRI-inspired recurrence reference per dataset. It is independent of the official HRI implementation. The runner reports strict-greater and expected-uniform tie metrics; `--hri-tie-policy expected_uniform` selects hyperparameters using the latter. These sensitivity outputs are additional analyses.
+RHVC requires a complete coefficient configuration;
 
 ## Diagnostics and runtime
 
@@ -74,11 +68,8 @@ python scripts/run_posthoc_audits.py \
 
 This runs input, top-K, history-group, age, rank-transition, and query-case analyses. `scripts/coverage_identity_audit.py` checks weighted coverage consistency using the same dataset, base and adjusted dumps, and `--k 100`.
 
-The matrix also supports `--include-posthoc` and `--include-runtime-profile`. Runtime profiling requires a trained adapter checkpoint and measures the local run. Statistical tools are documented in [the analysis run order](analysis/revision_tools/RUN_ORDER.md).
 
-## Code map and limitations
 
-See [code-to-method traceability](docs/CODE_TO_MANUSCRIPT_TRACEABILITY.md) and [the release review](docs/RELEASE_REVIEW.md). The submitted manuscript and original archives were not available for independent comparison during this review.
 
 ## License
 
